@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+environment/project/0.910961921/PATH/delimiter=\:
+environment/project/0.910961921/PATH/operation=replace
+environment/project/0.910961921/PATH/value=/Users/countrodrigo/.nvm/v0.10.36/bin\:/usr/local/Cellar/maven/3.3.3/bin\:/usr/local/sbin\:/usr/local/bin\:/usr/local/bin\:/usr/bin\:/bin\:/usr/sbin\:/sbin\:/opt/X11/bin\:/Users/countrodrigo/bin
+environment/project/0.910961921/append=true
+environment/project/0.910961921/appendContributed=true
