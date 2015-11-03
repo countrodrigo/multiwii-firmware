@@ -117,7 +117,9 @@ void alarmHandler(void){
 }
 
 void alarmPatternComposer(){ 
-  static char resource = 0;
+#if defined BUZZER || defined PILOTLAMP
+	static char resource = 0;
+#endif
   // patternDecode(length1,length2,length3,beeppause,endpause,loop)
   #if defined(BUZZER)
     resource = 1;                                                                                  //buzzer selected

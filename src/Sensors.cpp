@@ -153,7 +153,10 @@ uint8_t i2c_readReg(uint8_t add, uint8_t reg) {
 void GYRO_Common() {
   static int16_t previousGyroADC[3] = {0,0,0};
   static int32_t g[3];
-  uint8_t axis, tilt=0;
+  uint8_t axis;
+#if defined GYROCALIBRATIONFAILSAFE
+  uint8_t tilt=0;
+#endif
 
   #if defined MMGYRO       
     // Moving Average Gyros by Magnetron1

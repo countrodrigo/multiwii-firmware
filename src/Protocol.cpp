@@ -95,6 +95,7 @@ void evaluateCommand(uint8_t c);
 static uint8_t read8()  {
   return inBuf[indRX[CURRENTPORT]++][CURRENTPORT]&0xff;
 }
+#if GPS
 static uint16_t read16() {
   uint16_t t = read8();
   t+= (uint16_t)read8()<<8;
@@ -105,6 +106,7 @@ static uint32_t read32() {
   t+= (uint32_t)read16()<<16;
   return t;
 }
+#endif
 
 static void serialize8(uint8_t a) {
   SerialSerialize(CURRENTPORT,a);
@@ -114,12 +116,14 @@ static void serialize16(int16_t a) {
   serialize8((a   ) & 0xFF);
   serialize8((a>>8) & 0xFF);
 }
+#if GPS
 static void serialize32(uint32_t a) {
   serialize8((a    ) & 0xFF);
   serialize8((a>> 8) & 0xFF);
   serialize8((a>>16) & 0xFF);
   serialize8((a>>24) & 0xFF);
 }
+#endif
 
 static void headSerialResponse(uint8_t err, uint8_t s) {
   serialize8('$');
@@ -181,9 +185,11 @@ void serialCom() {
   static uint8_t offset[UART_NUMBER];
   static uint8_t dataSize[UART_NUMBER];
   static uint8_t c_state[UART_NUMBER];
+#ifdef GPS_SERIAL
   uint32_t timeMax; // limit max time in this function in case of GPS
-
   timeMax = micros();
+#endif
+
   for(port=0;port<UART_NUMBER;port++) {
     CURRENTPORT=port;
     #define RX_COND

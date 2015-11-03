@@ -613,15 +613,15 @@
   #define RX_PC_INTERRUPT            PCINT2_vect
   #define RX_PCINT_PIN_PORT          PINK
   
-  #define SERVO_1_PINMODE            DDRC |= 1<<3;DDRL |= 1<<5; // Arduino pin 34 , pin 44 // TILT_PITCH - WING left
-  #define SERVO_1_PIN_HIGH           PORTC |= 1<<3;PORTL |= 1<<5;
-  #define SERVO_1_PIN_LOW            PORTC &= ~(1<<3);PORTL &= ~(1<<5);
-  #define SERVO_2_PINMODE            DDRC |= 1<<2;DDRL |= 1<<4; // Arduino pin 35 , pin 45 // TILT_ROLL  - WING right
-  #define SERVO_2_PIN_HIGH           PORTC |= 1<<2;PORTL |= 1<<4;
-  #define SERVO_2_PIN_LOW            PORTC &= ~(1<<2);PORTL &= ~(1<<4);
-  #define SERVO_3_PINMODE            DDRC |= 1<<4;DDRL |= 1<<3; // Arduino pin 33 , pin 46 // CAM TRIG  - alt TILT_PITCH
-  #define SERVO_3_PIN_HIGH           PORTC |= 1<<4;PORTL |= 1<<3;
-  #define SERVO_3_PIN_LOW            PORTC &= ~(1<<4);PORTL &= ~(1<<3);
+//  #define SERVO_1_PINMODE            DDRC |= 1<<3;DDRL |= 1<<5; // Arduino pin 34 , pin 44 // TILT_PITCH - WING left
+//  #define SERVO_1_PIN_HIGH           PORTC |= 1<<3;PORTL |= 1<<5;
+//  #define SERVO_1_PIN_LOW            PORTC &= ~(1<<3);PORTL &= ~(1<<5);
+//  #define SERVO_2_PINMODE            DDRC |= 1<<2;DDRL |= 1<<4; // Arduino pin 35 , pin 45 // TILT_ROLL  - WING right
+//  #define SERVO_2_PIN_HIGH           PORTC |= 1<<2;PORTL |= 1<<4;
+//  #define SERVO_2_PIN_LOW            PORTC &= ~(1<<2);PORTL &= ~(1<<4);
+//  #define SERVO_3_PINMODE            DDRC |= 1<<4;DDRL |= 1<<3; // Arduino pin 33 , pin 46 // CAM TRIG  - alt TILT_PITCH
+//  #define SERVO_3_PIN_HIGH           PORTC |= 1<<4;PORTL |= 1<<3;
+//  #define SERVO_3_PIN_LOW            PORTC &= ~(1<<4);PORTL &= ~(1<<3);
   #define SERVO_4_PINMODE            DDRC |= 1<<0; DDRH |= 1<<4; // Arduino pin 37 , pin 7 // new       - alt TILT_ROLL
   #define SERVO_4_PIN_HIGH           PORTC |= 1<<0; PORTH |= 1<<4;
   #define SERVO_4_PIN_LOW            PORTC &= ~(1<<0);PORTH &= ~(1<<4);

@@ -57,7 +57,6 @@
 									<listOptionValue builtIn="false" value="ARDUINO_AVR_UNO"/>
 									<listOptionValue builtIn="false" value="ARDUINO=10605"/>
 									<listOptionValue builtIn="false" value="PLATFORMIO=020304"/>
-									<listOptionValue builtIn="false" value="__AVR_ATmega328P__"/>
 								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.762536863" languageId="org.eclipse.cdt.core.g++" languageName="GNU C++" sourceContentType="org.eclipse.cdt.core.cxxSource,org.eclipse.cdt.core.cxxHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 							</tool>
