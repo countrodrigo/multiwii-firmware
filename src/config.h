@@ -271,8 +271,8 @@
     //#define USE_THROTTLESERVO // For use of standard 50Hz servo on throttle.
 
     //#define FLAPPERONS    AUX4          // Mix Flaps with Aileroins.
-    #define FLAPPERON_EP   { 1500, 1700 } // Endpooints for flaps on a 2 way switch else set {1020,2000} and program in radio.
-    #define FLAPPERON_INVERT { -1, 1 }    // Change direction om flapperons { Wing1, Wing2 }
+//    #define FLAPPERON_EP   { 1500, 1700 } // Endpooints for flaps on a 2 way switch else set {1020,2000} and program in radio.
+//    #define FLAPPERON_INVERT { -1, 1 }    // Change direction om flapperons { Wing1, Wing2 }
     
     //#define FLAPS                       // Traditional Flaps on SERVO3.
     //#define FLAPSPEED     3             // Make flaps move slowm Higher value is Higher Speed.
@@ -288,27 +288,27 @@
     //#define GOVERNOR_D 4     // (*) decay timing. Higher value -> takes longer to return throttle to normal. Must be >=1;
 
     /* tail precomp from collective */
-    #define YAW_COLL_PRECOMP 10           // (*) proportional factor in 0.1. Higher value -> higher precomp effect. value of 10 equals no/neutral effect
-    #define YAW_COLL_PRECOMP_DEADBAND 120 // (*) deadband for collective pitch input signal around 0-pitch input value
+//    #define YAW_COLL_PRECOMP 10           // (*) proportional factor in 0.1. Higher value -> higher precomp effect. value of 10 equals no/neutral effect
+//    #define YAW_COLL_PRECOMP_DEADBAND 120 // (*) deadband for collective pitch input signal around 0-pitch input value
 
     //#define VOLTAGEDROP_COMPENSATION // voltage impact correction
 
   /***********************          Heli                           ***********************/
     /* Channel to control CollectivePitch */
-    #define COLLECTIVE_PITCH      THROTTLE
+//    #define COLLECTIVE_PITCH      THROTTLE
 
     /* Limit the range of Collective Pitch. 100% is Full Range each way and position for Zero Pitch */
-    #define COLLECTIVE_RANGE { 80, 0, 80 }// {Min%, ZeroPitch offset from 1500, Max%}.
-    #define YAWMOTOR                 0       // If a motor is used as YAW Set to 1 else set to 0.
+//    #define COLLECTIVE_RANGE { 80, 0, 80 }// {Min%, ZeroPitch offset from 1500, Max%}.
+//    #define YAWMOTOR                 0       // If a motor is used as YAW Set to 1 else set to 0.
 
     /* Servo mixing for heli 120
                          {Coll,Nick,Roll} */
-    #define SERVO_NICK   { +10, -10,  0 }
-    #define SERVO_LEFT   { +10, +5, +10 } 
-    #define SERVO_RIGHT  { +10, +5, -10 } 
+//    #define SERVO_NICK   { +10, -10,  0 }
+//    #define SERVO_LEFT   { +10, +5, +10 }
+//    #define SERVO_RIGHT  { +10, +5, -10 }
 
     /* Limit Maximum controll for Roll & Nick  in 0-100% */
-    #define CONTROL_RANGE   { 100, 100 }      //  { ROLL,PITCH }
+//    #define CONTROL_RANGE   { 100, 100 }      //  { ROLL,PITCH }
 
     /* use servo code to drive the throttle output. You want this for analog servo driving the throttle on IC engines.
        if inactive, throttle output will be treated as a motor output, so it can drive an ESC */
@@ -597,7 +597,7 @@ At this moment you can use this function only with WinGUI 2.3 release. MultiWiiC
        PITCH, ROLL and YAW is centered and THROTTLE is set to FAILSAFE_THROTTLE value. You must set this value to descending about 1m/s or so
        for best results. This value is depended from your configuration, AUW and some other params.  Next, after FAILSAFE_OFF_DELAY the copter is disarmed, 
        and motors is stopped. If RC pulse coming back before reached FAILSAFE_OFF_DELAY time, after the small quard time the RC control is returned to normal. */
-    //#define FAILSAFE                                // uncomment  to activate the failsafe function
+    #define FAILSAFE                                // uncomment  to activate the failsafe function
     #define FAILSAFE_DELAY     10                     // Guard time for failsafe activation after signal lost. 1 step = 0.1sec - 1sec in example
     #define FAILSAFE_OFF_DELAY 200                    // Time for Landing before motors stop in 0.1sec. 1 step = 0.1sec - 20sec in example
     #define FAILSAFE_THROTTLE  (MINTHROTTLE + 200)    // (*) Throttle level used for landing - may be relative to MINTHROTTLE - as in this case
