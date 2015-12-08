@@ -57,9 +57,6 @@ enum box {
     BOXGPSHOME,
     BOXGPSHOLD,
   #endif
-  #if defined(FIXEDWING) || defined(HELICOPTER)
-    BOXPASSTHRU,
-  #endif
   #if defined(BUZZER)
     BOXBEEPERON,
   #endif
@@ -72,9 +69,6 @@ enum box {
   #endif
   #ifdef INFLIGHT_ACC_CALIBRATION
     BOXCALIB,
-  #endif
-  #ifdef GOVERNOR_P
-    BOXGOV,
   #endif
   #ifdef OSD_SWITCH
     BOXOSD,
@@ -123,9 +117,6 @@ typedef struct {
   uint8_t BARO_MODE :1 ;
 #ifdef HEADFREE
   uint8_t HEADFREE_MODE :1 ;
-#endif
-#if defined(FIXEDWING) || defined(HELICOPTER)
-  uint8_t PASSTHRU_MODE :1 ;
 #endif
   uint8_t SMALL_ANGLES_25 :1 ;
 #if MAG
@@ -214,14 +205,6 @@ typedef struct {
     uint16_t armedtimewarning;
   #endif
   int16_t minthrottle;
-  #ifdef GOVERNOR_P
-   int16_t governorP;
-   int16_t governorD;
-  #endif
-  #ifdef YAW_COLL_PRECOMP
-   uint8_t yawCollPrecomp;
-   uint16_t yawCollPrecompDeadband;
-  #endif
   uint8_t  checksum;      // MUST BE ON LAST POSITION OF CONF STRUCTURE !
 } conf_t;
 

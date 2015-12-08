@@ -849,40 +849,8 @@ void initLCD() {
     LCDattributesBold();
     LCDsetLine(1); LCDprintChar(line1);
     strcpy_P(line2,PSTR("  Unknown Modell"));
-    #if defined(TRI)
-      strcpy_P(line2,PSTR("  TRICopter"));
-    #elif defined(QUADP)
-      strcpy_P(line2,PSTR("  QUAD-P"));
-    #elif defined(QUADX)
+    #if defined(QUADX)
       strcpy_P(line2,PSTR("  QUAD-X"));
-    #elif defined(BI)
-      strcpy_P(line2,PSTR("  BICopter"));
-    #elif defined(Y6)
-      strcpy_P(line2,PSTR("  Y6"));
-    #elif defined(HEX6)
-      strcpy_P(line2,PSTR("  HEX6"));
-    #elif defined(FLYING_WING)
-      strcpy_P(line2,PSTR("  FLYING_WING"));
-    #elif defined(Y4)
-      strcpy_P(line2,PSTR("  Y4"));
-    #elif defined(HEX6X)
-      strcpy_P(line2,PSTR("  HEX6-X"));
-    #elif defined(HEX6H)
-      strcpy_P(line2,PSTR("  HEX6-H"));
-    #elif defined(OCTOX8)
-      strcpy_P(line2,PSTR("  OCTOX8"));
-    #elif defined(OCTOFLATP)
-      strcpy_P(line2,PSTR("  OCTOFLAT-P"));
-    #elif defined(OCTOFLATX)
-      strcpy_P(line2,PSTR("  OCTOFLAT-X"));
-    #elif defined (AIRPLANE)
-      strcpy_P(line2,PSTR("  AIRPLANE"));
-    #elif defined (HELI_120_CCPM)
-      strcpy_P(line2,PSTR("  HELI_120_CCPM"));
-    #elif defined (HELI_90_DEG)
-      strcpy_P(line2,PSTR("  HELI_90_DEG"));
-    #elif defined(VTAIL4)
-      strcpy_P(line2,PSTR("  VTAIL Quad"));
     #endif
     //LCDattributesBold();
     LCDsetLine(2); LCDprintChar(line2);
@@ -1066,13 +1034,6 @@ const char PROGMEM lcd_param_text80 [] = "GSMOOTH R ";
 const char PROGMEM lcd_param_text81 [] = "GSMOOTH P ";
 const char PROGMEM lcd_param_text82 [] = "GSMOOTH Y ";
 #endif
-#ifdef AIRPLANE //                       0123456789
-const char PROGMEM lcd_param_text83 [] = "SERVoMID3";
-const char PROGMEM lcd_param_text84 [] = "SERVoMID4";
-const char PROGMEM lcd_param_text85 [] = "SERVoMID5";
-const char PROGMEM lcd_param_text86 [] = "SERVoMID6";
-const char PROGMEM lcd_param_text87 [] = "SERVoMID7";
-#endif
 #if GPS
 const char PROGMEM lcd_param_text91 [] = "GPS Pos. P";
 const char PROGMEM lcd_param_text92 [] = "GPS Pos. I";
@@ -1109,19 +1070,10 @@ const char PROGMEM lcd_param_text131 [] = "MINTHROTL";
 #if defined(ARMEDTIMEWARNING)
 const char PROGMEM lcd_param_text132 [] = "ArmdTWarn";
 #endif
-#ifdef GOVERNOR_P
-const char PROGMEM lcd_param_text133 [] = "Govern  P";
-const char PROGMEM lcd_param_text134 [] = "Govern  D";
-const char PROGMEM lcd_param_text135 [] = "GovernRpm";
-#endif
 #ifdef MULTIPLE_CONFIGURATION_PROFILES
 const char PROGMEM lcd_param_text150 [] = "writeCset";
 #endif
 const char PROGMEM lcd_param_text151 [] = "Reset (7)";
-#ifdef YAW_COLL_PRECOMP
-const char PROGMEM lcd_param_text155 [] = "yawPrcomp";
-const char PROGMEM lcd_param_text156 [] = "yawPrDead";
-#endif
 //                                         012345678
 
 PROGMEM const void * const lcd_param_ptr_table [] = {
@@ -1247,16 +1199,6 @@ PROGMEM const void * const lcd_param_ptr_table [] = {
       &lcd_param_text49, &conf.activate[BOXGPSHOLD], &__AUX4,
     #endif
   #endif
-  #if defined(FIXEDWING) || defined(HELICOPTER)
-    &lcd_param_text50, &conf.activate[BOXPASSTHRU],&__AUX1,
-    #ifndef SUPPRESS_LCD_CONF_AUX2
-      &lcd_param_text50, &conf.activate[BOXPASSTHRU],&__AUX2,
-    #endif
-    #ifndef SUPPRESS_LCD_CONF_AUX34
-      &lcd_param_text50, &conf.activate[BOXPASSTHRU],&__AUX3,
-      &lcd_param_text50, &conf.activate[BOXPASSTHRU],&__AUX4,
-    #endif
-  #endif
   #if defined(HEADFREE)
     &lcd_param_text51, &conf.activate[BOXHEADFREE],&__AUX1,
     #ifndef SUPPRESS_LCD_CONF_AUX2
@@ -1297,16 +1239,6 @@ PROGMEM const void * const lcd_param_ptr_table [] = {
       &lcd_param_text54, &conf.activate[BOXCALIB],&__AUX4,
     #endif
   #endif
-#ifdef GOVERNOR_P
-  &lcd_param_text55, &conf.activate[BOXGOV],&__AUX1,
-  #ifndef SUPPRESS_LCD_CONF_AUX2
-    &lcd_param_text55, &conf.activate[BOXGOV],&__AUX2,
-  #endif
-  #ifndef SUPPRESS_LCD_CONF_AUX34
-    &lcd_param_text55, &conf.activate[BOXGOV],&__AUX3,
-    &lcd_param_text55, &conf.activate[BOXGOV],&__AUX4,
-  #endif
-#endif
 #ifdef OSD_SWITCH
   &lcd_param_text56, &conf.activate[BOXOSD],&__AUX1,
   #ifndef SUPPRESS_LCD_CONF_AUX2
@@ -1371,24 +1303,10 @@ PROGMEM const void * const lcd_param_ptr_table [] = {
   &lcd_param_text143, &conf.servoConf[6].rate, &__BITS,
   &lcd_param_text142, &conf.servoConf[5].rate, &__BITS,
 #endif
-#ifdef GOVERNOR_P
-  &lcd_param_text133, &conf.governorP, &__D,
-  &lcd_param_text134, &conf.governorD, &__D,
-#endif
-#ifdef YAW_COLL_PRECOMP
-  &lcd_param_text155, &conf.yawCollPrecomp, &__PT,
-  &lcd_param_text156, &conf.yawCollPrecompDeadband, &__SE,
-#endif
 #ifdef GYRO_SMOOTHING
   &lcd_param_text80, &conf.Smoothing[0], &__D,
   &lcd_param_text81, &conf.Smoothing[1], &__D,
   &lcd_param_text82, &conf.Smoothing[2], &__D,
-#endif
-#ifdef AIRPLANE
-  &lcd_param_text83, &conf.servoConf[3].middle, &__SE,
-  &lcd_param_text84, &conf.servoConf[4].middle, &__SE,
-  &lcd_param_text85, &conf.servoConf[5].middle, &__SE,
-  &lcd_param_text86, &conf.servoConf[6].middle, &__SE,
 #endif
 #ifdef MMGYRO
   &lcd_param_text121, &conf.mmgyro, &__D,
@@ -1625,9 +1543,6 @@ void configurationLoop() {
         #define MAX_SERV PRI_SERVO_TO
       #endif
       for(i=PRI_SERVO_FROM-1; i<MAX_SERV; i++) servo[i] = conf.servoConf[i].middle;
-      #if defined(HELICOPTER) && YAWMOTOR
-        servo[5] =  MINCOMMAND;
-      #endif  
       #if defined(TRI) && defined(MEGA_HW_PWM_SERVOS) && defined(MEGA)
         servo[3] = servo[5];
       #endif
@@ -1945,9 +1860,6 @@ static char checkboxitemNames[][4] = {
       "GHm",
       "GHd",
     #endif
-    #if defined(FIXEDWING) || defined(HELICOPTER)
-      "Pas",
-    #endif
     #if defined(BUZZER)
       "Buz",
     #endif
@@ -1960,9 +1872,6 @@ static char checkboxitemNames[][4] = {
     #endif
     #ifdef INFLIGHT_ACC_CALIBRATION
       "Cal",
-    #endif
-    #ifdef GOVERNOR_P
-      "Gov",
     #endif
     #ifdef OSD_SWITCH
       "OSD",

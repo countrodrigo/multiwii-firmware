@@ -19,13 +19,6 @@ Format: It is sorted by short description and
    scripts.  The fields are: name (N), email (E), web-address
    (W), description (D), and short description (S).
 
-
-S: AIRPLANE mode - Experimental
-D:
-N: PatrikE
-E:
-W: http://fotoflygarn.blogspot.com/2012/03/how-to-setup-multiwii-airplane-same.html
-
 S: RCSERIAL
 D: input RC signal with the serial port
 N: Luis Correia

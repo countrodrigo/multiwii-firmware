@@ -216,17 +216,6 @@ void GYRO_Common() {
   #endif    
     previousGyroADC[axis] = imu.gyroADC[axis];
   }
-
-  #if defined(SENSORS_TILT_45DEG_LEFT)
-    int16_t temp  = ((imu.gyroADC[PITCH] - imu.gyroADC[ROLL] )*7)/10;
-    imu.gyroADC[ROLL] = ((imu.gyroADC[ROLL]  + imu.gyroADC[PITCH])*7)/10;
-    imu.gyroADC[PITCH]= temp;
-  #endif
-  #if defined(SENSORS_TILT_45DEG_RIGHT)
-    int16_t temp  = ((imu.gyroADC[PITCH] + imu.gyroADC[ROLL] )*7)/10;
-    imu.gyroADC[ROLL] = ((imu.gyroADC[ROLL]  - imu.gyroADC[PITCH])*7)/10;
-    imu.gyroADC[PITCH]= temp;
-  #endif
 }
 
 // ****************
@@ -298,17 +287,6 @@ void ACC_Common() {
   imu.accADC[ROLL]  -=  global_conf.accZero[ROLL] ;
   imu.accADC[PITCH] -=  global_conf.accZero[PITCH];
   imu.accADC[YAW]   -=  global_conf.accZero[YAW] ;
-
-  #if defined(SENSORS_TILT_45DEG_LEFT)
-    int16_t temp = ((imu.accADC[PITCH] - imu.accADC[ROLL] )*7)/10;
-    imu.accADC[ROLL] = ((imu.accADC[ROLL]  + imu.accADC[PITCH])*7)/10;
-    imu.accADC[PITCH] = temp;
-  #endif
-  #if defined(SENSORS_TILT_45DEG_RIGHT)
-    int16_t temp = ((imu.accADC[PITCH] + imu.accADC[ROLL] )*7)/10;
-    imu.accADC[ROLL] = ((imu.accADC[ROLL]  - imu.accADC[PITCH])*7)/10;
-    imu.accADC[PITCH] = temp;
-  #endif
 }
 
 // ************************************************************************************************************
@@ -948,17 +926,6 @@ uint8_t Mag_getADC() { // return 1 when news values are available, 0 otherwise
       writeGlobalSet(1);
     }
   }
-
-  #if defined(SENSORS_TILT_45DEG_LEFT)
-    int16_t temp = ((imu.magADC[PITCH] - imu.magADC[ROLL] )*7)/10;
-    imu.magADC[ROLL] = ((imu.magADC[ROLL]  + imu.magADC[PITCH])*7)/10;
-    imu.magADC[PITCH] = temp;
-  #endif
-  #if defined(SENSORS_TILT_45DEG_RIGHT)
-    int16_t temp = ((imu.magADC[PITCH] + imu.magADC[ROLL] )*7)/10;
-    imu.magADC[ROLL] = ((imu.magADC[ROLL]  - imu.magADC[PITCH])*7)/10;
-    imu.magADC[PITCH] = temp;
-  #endif
   
   return 1;
 }

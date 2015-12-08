@@ -387,7 +387,7 @@ void evaluateCommand(uint8_t c) {
       id.v     = VERSION;
       id.t     = MULTITYPE;
       id.msp_v = MSP_VERSION;
-      id.cap   = (0+BIND_CAPABLE)|DYNBAL<<2|FLAP<<3|NAVCAP<<4|EXTAUX<<5|((uint32_t)NAVI_VERSION<<28); //Navi version is stored in the upper four bits; 
+      id.cap   = (0+BIND_CAPABLE)|DYNBAL<<2|NAVCAP<<4|EXTAUX<<5|((uint32_t)NAVI_VERSION<<28); //Navi version is stored in the upper four bits;
       s_struct((uint8_t*)&id,7);
       break;
     case MSP_STATUS:
@@ -407,12 +407,10 @@ void evaluateCommand(uint8_t c) {
         if(f.BARO_MODE) tmp |= 1<<BOXBARO;
       #endif
       if(f.MAG_MODE) tmp |= 1<<BOXMAG;
-      #if !defined(FIXEDWING)
         #if defined(HEADFREE)
           if(f.HEADFREE_MODE)       tmp |= 1<<BOXHEADFREE;
           if(rcOptions[BOXHEADADJ]) tmp |= 1<<BOXHEADADJ;
         #endif
-      #endif
       #if defined(SERVO_TILT) || defined(GIMBAL)|| defined(SERVO_MIX_TILT)
         if(rcOptions[BOXCAMSTAB]) tmp |= 1<<BOXCAMSTAB;
       #endif
@@ -432,9 +430,6 @@ void evaluateCommand(uint8_t c) {
             break;
         }
       #endif
-      #if defined(FIXEDWING) || defined(HELICOPTER)
-        if(f.PASSTHRU_MODE) tmp |= 1<<BOXPASSTHRU;
-      #endif
       #if defined(BUZZER)
         if(rcOptions[BOXBEEPERON]) tmp |= 1<<BOXBEEPERON;
       #endif
@@ -450,9 +445,6 @@ void evaluateCommand(uint8_t c) {
       #endif
       #if defined(INFLIGHT_ACC_CALIBRATION)
         if(rcOptions[BOXCALIB]) tmp |= 1<<BOXCALIB;
-      #endif
-      #if defined(GOVERNOR_P)
-        if(rcOptions[BOXGOV]) tmp |= 1<<BOXGOV;
       #endif
       #if defined(OSD_SWITCH)
         if(rcOptions[BOXOSD]) tmp |= 1<<BOXOSD;

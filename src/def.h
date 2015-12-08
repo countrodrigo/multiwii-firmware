@@ -4,33 +4,7 @@
 /**************************************************************************************/
 /***************             test configurations                   ********************/
 /**************************************************************************************/
-#if COPTERTEST == 1
-  #define QUADP
-  #define WMP
-#elif COPTERTEST == 2
-  #define FLYING_WING
-  #define WMP
-  #define BMA020
-  #define FAILSAFE
-  #define LCD_CONF
-  #define LCD_TEXTSTAR
-  #define VBAT
-  #define POWERMETER_SOFT
-#elif COPTERTEST == 3
-  #define TRI
-  #define FREEIMUv035_MS
-  #define BUZZER
-  #define VBAT
-  #define POWERMETER_HARD
-  #define LCD_CONF
-  #define LCD_CONF_AUX
-  #define LCD_VT100
-  #define LCD_TELEMETRY
-  #define LCD_TELEMETRY_STEP "01245"
-  #define LOG_VALUES 1
-  #define SUPPRESS_BARO_ALTHOLD
-  #define VARIOMETER 12
-#elif COPTERTEST == 4
+#if COPTERTEST == 4
   #define QUADX
   #define CRIUS_SE
   #define SPEKTRUM 2048
@@ -40,97 +14,6 @@
   #define LOG_VALUES 2
   #define LOG_PERMANENT
   #define LOG_PERMANENT_SERVICE_LIFETIME 36000
-#elif COPTERTEST == 5
-  #define HELI_120_CCPM
-  #define CRIUS_LITE
-  #undef DISABLE_POWER_PIN
-  #define RCAUXPIN8
-  #define OLED_I2C_128x64
-  #define LCD_TELEMETRY
-  #define LOG_VALUES 3
-  #define DEBUG
-  #undef SERVO_RFR_50HZ
-  #define SERVO_RFR_160HZ
-  #define VBAT
-  #define POWERMETER_SOFT
-  #define MMGYRO 10
-  #define MMGYROVECTORLENGTH 15
-  #define GYRO_SMOOTHING {45, 45, 50}
-  #define INFLIGHT_ACC_CALIBRATION
-  #define LOG_PERMANENT
-  #define LOG_PERMANENT_SHOW_AT_STARTUP
-  #define LOG_PERMANENT_SHOW_AT_L
-  #define LOG_PERMANENT_SERVICE_LIFETIME 36000
-  #define GOVERNOR_P 0
-  #define GOVERNOR_D 10
-  #define YAW_COLL_PRECOMP 15
-  #define YAW_COLL_PRECOMP_DEADBAND 130
-  #define VOLTAGEDROP_COMPENSATION
-#elif COPTERTEST == 6
-  #define HEX6H
-  #define DIYFLYING_MAGE_V1
-  #define BUZZER
-  #define RCOPTIONSBEEP // ca. 80byte
-  #define ARMEDTIMEWARNING 480 // 8 min = 480seconds
-  #define VBAT
-  #define VOLTAGEDROP_COMPENSATION
-  #define MEGA_HW_PWM_SERVOS
-  #define SERVO_RFR_RATE  300    // In Hz, you can set it from 20 to 400Hz, used only in HW PWM mode
-  #define LOG_VALUES 1
-  #define DEBUG
-  #define MULTIPLE_CONFIGURATION_PROFILES
-  #define DISPLAY_FONT_DSIZE
-  #define OLED_DIGOLE
-  #define LCD_CONF
-#elif COPTERTEST == 7
-  #define HELI_120_CCPM
-  #define YAW_COLL_PRECOMP 15
-  #define YAW_COLL_PRECOMP_DEADBAND 130
-  #define NANOWII
-  #define FORCE_ACC_ORIENTATION(X, Y, Z)  {imu.accADC[ROLL]  = X; imu.accADC[PITCH]  =  Y; imu.accADC[YAW]  =  Z;}
-  #define FORCE_GYRO_ORIENTATION(X, Y, Z) {imu.gyroADC[ROLL] = -Y; imu.gyroADC[PITCH] = X; imu.gyroADC[YAW] = -Z;}
-  #define A32U4_4_HW_PWM_SERVOS
-  #define SERVO_RFR_RATE  200    // 200 for graupner is ok
-  #define SERVO_PIN5_RFR_RATE  165    // In Hz, you can set it from 20 to 400Hz, used only in HW PWM mode for mega and 32u4
-  #define SPEKTRUM 1024
-  #define BUZZER
-  #define RCOPTIONSBEEP // ca. 80byte
-  #define VBAT
-  #define LOG_VALUES 1
-  #define DISPLAY_FONT_DSIZE
-  #define OLED_DIGOLE
-  #define LCD_CONF
-  #define LCD_TELEMETRY
-  #define LCD_TELEMETRY_AUTO "1"
-  #define LCD_TELEMETRY_STEP "F14$5R"
-  #define LOG_PERMANENT
-  #define LOG_PERMANENT_SHOW_AFTER_CONFIG
-  #define SUPPRESS_OTHER_SERIAL_COMMANDS
-  #define SUPPRESS_DEFAULTS_FROM_GUI
-  #define NO_FLASH_CHECK
-  #define DEBUG_FREE
-#elif COPTERTEST == 8
-  #define BI
-  #define ITG3200
-  #define PID_CONTROLLER 2
-  #define ESC_CALIB_CANNOT_FLY
-#elif COPTERTEST == 9
-  #define AIRPLANE
-  #define FREEIMUv035
-  #define POWERMETER_HARD
-  #define WATTS
-  #define VBAT
-  #define VBAT_CELLS
-  #define VBAT_CELLS_NUM 3
-  #define VBAT_CELLS_PINS {A0, A1, A2 }
-  #define VBAT_CELLS_OFFSETS {0, 50, 83 }
-  #define VBAT_CELLS_DIVS { 75, 122,  98 }
-#elif COPTERTEST == 10
-  #define Y6
-  #define CRIUS_AIO_PRO
-  #define LCD_LCD03S
-  #define SERIAL0_COM_SPEED 9600
-  #define LCD_CONF
 #elif defined(COPTERTEST)
   #error "*** this test is not yet defined"
 #endif
@@ -156,18 +39,6 @@
 /**************************************************************************************/
 #define SERVO_RATES      {30,30,100,100,100,100,100,100}
 
-#if defined (AIRPLANE) || defined(FLYING_WING)
-  #define FIXEDWING
-#endif
-
-#if defined(HELI_120_CCPM) || defined(HELI_90_DEG)
-  #define HELICOPTER
-#endif
-
-#if defined(BI) || defined(TRI) || defined(FIXEDWING) || defined(HELICOPTER) || defined(SINGLECOPTER)|| defined(DUALCOPTER)
-  #define COPTER_WITH_SERVO
-#endif
-
 #if defined(COPTER_WITH_SERVO) || defined(SERVO_TILT) || defined(GIMBAL) || defined(CAMTRIG) || defined(SERVO_MIX_TILT)
   #define SERVO
 #endif
@@ -176,11 +47,6 @@
   #define DYNBAL 1
 #else
   #define DYNBAL 0
-#endif
-#if defined(FLAPS)
-  #define FLAP 1
-#else
-  #define FLAP 0
 #endif
 
 #if defined(MEGA) && defined(MEGA_HW_PWM_SERVOS)
@@ -193,60 +59,8 @@
   #define NUMBER_MOTOR     0
   #define PRI_SERVO_FROM   1 // use servo from 1 to 2
   #define PRI_SERVO_TO     2
-#elif defined(FLYING_WING)
-  #define PRI_SERVO_FROM   4
-  #if defined (USE_THROTTLESERVO)
-    #define NUMBER_MOTOR   0
-    #define PRI_SERVO_TO   8 // use servo from 4,5 and 8
-  #else
-    #define NUMBER_MOTOR   1
-    #define PRI_SERVO_TO   5 // use servo from 4 to 5
-  #endif
-#elif defined(SINGLECOPTER)
-  #define NUMBER_MOTOR     1
-  #define PRI_SERVO_FROM   4 // use servo from 4 to 7
-  #define PRI_SERVO_TO     7
-#elif defined(DUALCOPTER)
-  #define NUMBER_MOTOR     2
-  #define PRI_SERVO_FROM   5 // use servo from 5 to 6
-  #define PRI_SERVO_TO     6
-#elif defined(AIRPLANE)
-  #if defined (USE_THROTTLESERVO)
-    #define NUMBER_MOTOR   0
-    #define PRI_SERVO_TO   8
-  #else
-    #define NUMBER_MOTOR   1
-    #define PRI_SERVO_TO   7
-  #endif
-  #if defined(FLAPS) 
-    #define PRI_SERVO_FROM   3 // use servo from 3 to 8    
-    #undef CAMTRIG             // Disable Camtrig on A2
-  #else
-    #define PRI_SERVO_FROM   4 // use servo from 4 to 8
-  #endif  
-#elif defined(BI)
-  #define NUMBER_MOTOR     2
-  #define PRI_SERVO_FROM   5 // use servo from 5 to 6
-  #define PRI_SERVO_TO     6
-#elif defined(TRI)
-  #define NUMBER_MOTOR     3
-  #define PRI_SERVO_FROM   TRI_SERVO // use only servo 6 (or 4 with Mega HW PWM)
-  #define PRI_SERVO_TO     TRI_SERVO
-#elif defined(QUADP) || defined(QUADX) || defined(Y4)|| defined(VTAIL4)
+#elif defined(QUADX)
   #define NUMBER_MOTOR     4
-#elif defined(Y6) || defined(HEX6) || defined(HEX6X) || defined(HEX6H)
-  #define NUMBER_MOTOR     6
-#elif defined(OCTOX8) || defined(OCTOFLATP) || defined(OCTOFLATX)
-  #define NUMBER_MOTOR     8
-#elif defined(HELICOPTER)
-  #define PRI_SERVO_FROM   4
-  #ifdef HELI_USE_SERVO_FOR_THROTTLE
-    #define NUMBER_MOTOR   0 // use servo to drive throttle output
-    #define PRI_SERVO_TO   8 // use servo from 4 to 8
-  #else
-    #define NUMBER_MOTOR   1 // use motor1 for throttle, DO  NOT SET TO 2, OR IT WILL BURN/DESTROY SERVO7 USED FOR SWASH
-    #define PRI_SERVO_TO   7 // use servo from 4 to 7
-  #endif
 #endif
 
 #if (defined(SERVO_TILT)|| defined(SERVO_MIX_TILT))&& defined(CAMTRIG)
@@ -1723,71 +1537,17 @@
 /**************************************************************************************/
 /***************      Multitype decleration for the GUI's          ********************/
 /**************************************************************************************/
-#if defined(TRI)
-  #define MULTITYPE 1
-#elif defined(QUADP)
-  #define MULTITYPE 2
-#elif defined(QUADX)
+#if defined(QUADX)
   #define MULTITYPE 3
-#elif defined(BI)
-  #define MULTITYPE 4
-  #define SERVO_RATES      {30,30,100,100,0,1,100,100}
 #elif defined(GIMBAL)
   #define MULTITYPE 5
-#elif defined(Y6)
-  #define MULTITYPE 6
-#elif defined(HEX6)
-  #define MULTITYPE 7
-#elif defined(FLYING_WING)
-  #define MULTITYPE 8
-  #define SERVO_RATES      {30,30,100,0,1,100,100,100}
-#elif defined(Y4)
-  #define MULTITYPE 9
-#elif defined(HEX6X)
-  #define MULTITYPE 10
-#elif defined(OCTOX8)
-  #define MULTITYPE 11   //the JAVA GUI is the same for all 8 motor configs 
-#elif defined(OCTOFLATP)
-  #define MULTITYPE 12   //12  for MultiWinGui
-#elif defined(OCTOFLATX)
-  #define MULTITYPE 13   //13  for MultiWinGui 
-#elif defined(AIRPLANE)
-  #define MULTITYPE 14    
-  #define SERVO_RATES      {30,30,100,100,-100,100,100,100}
-#elif defined (HELI_120_CCPM)   
-  #define MULTITYPE 15      
-#elif defined (HELI_90_DEG)   
-  #define MULTITYPE 16      
-  #define SERVO_RATES      {30,30,100,-100,-100,100,100,100}
 #elif defined(VTAIL4)
   #define MULTITYPE 17
-#elif defined(HEX6H)
-  #define MULTITYPE 18
-#elif defined(SINGLECOPTER)
-  #define MULTITYPE 21
-  #define SERVO_RATES      {30,30,100,0,1,0,1,100}
-#elif defined(DUALCOPTER)
-  #define MULTITYPE 20
 #endif
 
 /**************************************************************************************/
 /***************          Some unsorted "chain" defines            ********************/
 /**************************************************************************************/
-
-#if defined (AIRPLANE) || defined(HELICOPTER)|| defined(SINGLECOPTER)|| defined(DUALCOPTER) && defined(PROMINI) 
-  #if defined(D12_POWER)
-    #define SERVO_4_PINMODE            ;  // D12
-    #define SERVO_4_PIN_HIGH           ;
-    #define SERVO_4_PIN_LOW            ;
-  #else
-    #undef POWERPIN_PINMODE
-    #undef POWERPIN_ON
-    #undef POWERPIN_OFF
-    #define POWERPIN_PINMODE           ;
-    #define POWERPIN_ON                ;
-    #define POWERPIN_OFF               ;
-  #endif
-#endif
 
 #if defined(POWERMETER_HARD) || defined(POWERMETER_SOFT)
   #define POWERMETER

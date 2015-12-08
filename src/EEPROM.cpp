@@ -124,14 +124,6 @@ void update_constants() {
   #if MAG
     conf.mag_declination = (int16_t)(MAG_DECLINATION * 10);
   #endif
-  #ifdef GOVERNOR_P
-    conf.governorP = GOVERNOR_P;
-    conf.governorD = GOVERNOR_D;
-  #endif
-  #ifdef YAW_COLL_PRECOMP
-    conf.yawCollPrecomp = YAW_COLL_PRECOMP;
-    conf.yawCollPrecompDeadband = YAW_COLL_PRECOMP_DEADBAND;
-  #endif
   #if defined(MY_PRIVATE_DEFAULTS)
     #include MY_PRIVATE_DEFAULTS
   #endif
@@ -206,10 +198,6 @@ void LoadDefaults() {
 //        conf.servoConf[i].middle = 0;
 //        conf.servoConf[i].rate = 0;
 //      }
-  #endif
-  #ifdef FIXEDWING
-    conf.dynThrPID = 50;
-    conf.rcExpo8   =  0;
   #endif
   update_constants(); // this will also write to eeprom
 }

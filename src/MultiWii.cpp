@@ -71,9 +71,6 @@ const char boxnames[] PROGMEM = // names for dynamic generation of config GUI
   "GPS HOME;"
   "GPS HOLD;"
 #endif
-#if defined(FIXEDWING) || defined(HELICOPTER)
-  "PASSTHRU;"
-#endif
 #if defined(BUZZER)
   "BEEPER;"
 #endif
@@ -86,9 +83,6 @@ const char boxnames[] PROGMEM = // names for dynamic generation of config GUI
 #endif
 #ifdef INFLIGHT_ACC_CALIBRATION
   "CALIB;"
-#endif
-#ifdef GOVERNOR_P
-  "GOVERNOR;"
 #endif
 #ifdef OSD_SWITCH
   "OSD SW;"
@@ -126,9 +120,6 @@ const uint8_t boxids[] PROGMEM = {// permanent IDs associated to boxes. This way
   10, //"GPS HOME;"
   11, //"GPS HOLD;"
 #endif
-#if defined(FIXEDWING) || defined(HELICOPTER)
-  12, //"PASSTHRU;"
-#endif
 #if defined(BUZZER)
   13, //"BEEPER;"
 #endif
@@ -141,9 +132,6 @@ const uint8_t boxids[] PROGMEM = {// permanent IDs associated to boxes. This way
 #endif
 #ifdef INFLIGHT_ACC_CALIBRATION
   17, //"CALIB;"
-#endif
-#ifdef GOVERNOR_P
-  18, //"GOVERNOR;"
 #endif
 #ifdef OSD_SWITCH
   19, //"OSD_SWITCH;"
@@ -373,12 +361,8 @@ void annexCode() { // this code is excetuted at each loop and won't interfere wi
   uint16_t tmp,tmp2;
   uint8_t axis,prop1,prop2;
 
-  // PITCH & ROLL only dynamic PID adjustemnt,  depending on throttle value (or collective.pitch value for heli)
-  #ifdef HELICOPTER
-    #define DYN_THR_PID_CHANNEL COLLECTIVE_PITCH
-  #else
-    #define DYN_THR_PID_CHANNEL THROTTLE
-  #endif
+  // PITCH & ROLL only dynamic PID adjustemnt, depending on throttle value
+  #define DYN_THR_PID_CHANNEL THROTTLE
   prop2 = 128; // prop2 was 100, is 128 now
   if (rcData[DYN_THR_PID_CHANNEL]>1500) { // breakpoint is fix: 1500
     if (rcData[DYN_THR_PID_CHANNEL]<2000) {
@@ -901,7 +885,6 @@ void loop () {
     
     // perform actions    
     if (rcData[THROTTLE] <= MINCHECK) {            // THROTTLE at minimum
-      #if !defined(FIXEDWING)
         errorGyroI[ROLL] = 0; errorGyroI[PITCH] = 0;
         #if PID_CONTROLLER == 1
           errorGyroI_YAW = 0;
@@ -909,7 +892,6 @@ void loop () {
           errorGyroI[YAW] = 0;
         #endif
         errorAngleI[ROLL] = 0; errorAngleI[PITCH] = 0;
-      #endif
       if (conf.activate[BOXARM] > 0) {             // Arming/Disarming via ARM BOX
         if ( rcOptions[BOXARM] && f.OK_TO_ARM ) go_arm(); else if (f.ARMED) go_disarm();
       }
@@ -1232,11 +1214,6 @@ void loop () {
     }
 
     #endif //GPS
-
-    #if defined(FIXEDWING) || defined(HELICOPTER)
-      if (rcOptions[BOXPASSTHRU]) {f.PASSTHRU_MODE = 1;}
-      else {f.PASSTHRU_MODE = 0;}
-    #endif
  
   } else { // not in rc loop
     static uint8_t taskOrder=0; // never call all functions in the same loop, to avoid high delay spikes

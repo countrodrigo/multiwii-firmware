@@ -16,7 +16,6 @@
  * 6 - OPTIONAL FEATURES - enable nice to have features here (FlightModes, LCD, telemetry, battery monitor etc.)
  * 7 - TUNING & DEVELOPER - if you know what you are doing; you have been warned
  *     - (ESCs calibration, Dynamic Motor/Prop Balancing, Diagnostics,Memory savings.....)
- * 8 - DEPRECATED - these features will be removed in some future release
  */
 
 /* Notes:
@@ -33,25 +32,7 @@
 
   /**************************    The type of multicopter    ****************************/
     //#define GIMBAL
-    //#define BI
-    //#define TRI
-    //#define QUADP
     #define QUADX
-    //#define Y4
-    //#define Y6
-    //#define HEX6
-    //#define HEX6X
-    //#define HEX6H  // New Model
-    //#define OCTOX8
-    //#define OCTOFLATP
-    //#define OCTOFLATX
-    //#define FLYING_WING
-    //#define VTAIL4
-    //#define AIRPLANE
-    //#define SINGLECOPTER
-    //#define DUALCOPTER
-    //#define HELI_120_CCPM
-    //#define HELI_90_DEG
 
   /****************************    Motor minthrottle    *******************************/
     /* Set the minimum throttle command sent to the ESC (Electronic Speed Controller)
@@ -206,13 +187,6 @@
       //#define FORCE_GYRO_ORIENTATION(X, Y, Z) {imu.gyroADC[ROLL] = -Y; imu.gyroADC[PITCH] =  X; imu.gyroADC[YAW] = Z;}
       //#define FORCE_MAG_ORIENTATION(X, Y, Z)  {imu.magADC[ROLL]  =  X; imu.magADC[PITCH]  =  Y; imu.magADC[YAW]  = Z;}
 
-      /* Board orientation shift */
-      /* If you have frame designed only for + mode and you cannot rotate FC phisycally for flying in X mode (or vice versa)
-       * you can use one of of this options for virtual sensors rotation by 45 deegres, then set type of multicopter according to flight mode.
-       * Check motors order and directions of motors rotation for matching with new front point!  Uncomment only one option! */
-      //#define SENSORS_TILT_45DEG_RIGHT        // rotate the FRONT 45 degres clockwise
-      //#define SENSORS_TILT_45DEG_LEFT         // rotate the FRONT 45 degres counterclockwise
-
 
 /*************************************************************************************************/
 /*****************                                                                 ***************/
@@ -226,7 +200,6 @@
      * */
     #define PID_CONTROLLER 1
 
-    /* NEW: not used anymore for servo coptertypes  <== NEEDS FIXING - MOVE TO WIKI */
     #define YAW_DIRECTION 1
     //#define YAW_DIRECTION -1 // if you want to reverse the yaw correction direction
 
@@ -266,53 +239,6 @@
     // trigger interval can be changed via (*GUI*) or via AUX channel
     //#define CAMTRIG
     #define CAM_TIME_HIGH 1000   // the duration of HIGH state servo expressed in ms
-
-  /***********************          Airplane                       ***********************/
-    //#define USE_THROTTLESERVO // For use of standard 50Hz servo on throttle.
-
-    //#define FLAPPERONS    AUX4          // Mix Flaps with Aileroins.
-//    #define FLAPPERON_EP   { 1500, 1700 } // Endpooints for flaps on a 2 way switch else set {1020,2000} and program in radio.
-//    #define FLAPPERON_INVERT { -1, 1 }    // Change direction om flapperons { Wing1, Wing2 }
-    
-    //#define FLAPS                       // Traditional Flaps on SERVO3.
-    //#define FLAPSPEED     3             // Make flaps move slowm Higher value is Higher Speed.
-
-  /***********************      Common for Heli & Airplane         ***********************/
-
-    /* Governor: attempts to maintain rpm through pitch and voltage changes
-     * predictive approach: observe input signals and voltage and guess appropriate corrections.
-     * (the throttle curve must leave room for the governor, so 0-50-75-80-80 is ok, 0-50-95-100-100 is _not_ ok.
-     * Can be toggled via aux switch.
-     */
-    //#define GOVERNOR_P 7     // (*) proportional factor. Higher value -> higher throttle increase. Must be >=1; 0 = turn off
-    //#define GOVERNOR_D 4     // (*) decay timing. Higher value -> takes longer to return throttle to normal. Must be >=1;
-
-    /* tail precomp from collective */
-//    #define YAW_COLL_PRECOMP 10           // (*) proportional factor in 0.1. Higher value -> higher precomp effect. value of 10 equals no/neutral effect
-//    #define YAW_COLL_PRECOMP_DEADBAND 120 // (*) deadband for collective pitch input signal around 0-pitch input value
-
-    //#define VOLTAGEDROP_COMPENSATION // voltage impact correction
-
-  /***********************          Heli                           ***********************/
-    /* Channel to control CollectivePitch */
-//    #define COLLECTIVE_PITCH      THROTTLE
-
-    /* Limit the range of Collective Pitch. 100% is Full Range each way and position for Zero Pitch */
-//    #define COLLECTIVE_RANGE { 80, 0, 80 }// {Min%, ZeroPitch offset from 1500, Max%}.
-//    #define YAWMOTOR                 0       // If a motor is used as YAW Set to 1 else set to 0.
-
-    /* Servo mixing for heli 120
-                         {Coll,Nick,Roll} */
-//    #define SERVO_NICK   { +10, -10,  0 }
-//    #define SERVO_LEFT   { +10, +5, +10 }
-//    #define SERVO_RIGHT  { +10, +5, -10 }
-
-    /* Limit Maximum controll for Roll & Nick  in 0-100% */
-//    #define CONTROL_RANGE   { 100, 100 }      //  { ROLL,PITCH }
-
-    /* use servo code to drive the throttle output. You want this for analog servo driving the throttle on IC engines.
-       if inactive, throttle output will be treated as a motor output, so it can drive an ESC */
-    //#define HELI_USE_SERVO_FOR_THROTTLE
 
   /***********************      your individual mixing     ***********************/
     /* if you want to override an existing entry in the mixing table, you may want to avoid editing the
@@ -471,26 +397,6 @@ At this moment you can use this function only with WinGUI 2.3 release. MultiWiiC
       /* Inverted status LED for Promicro ver 10 */
       //#define PROMICRO10
 
-
-  /**************************************************************************************/
-  /********                      override default pin assignments    ********************/
-  /**************************************************************************************/
-
-  /* only enable any of this if you must change the default pin assignment, e.g. your board does not have a specific pin */
-  /* you may need to change PINx and PORTx plus #shift according to the desired pin! */
-  //#define OVERRIDE_V_BATPIN                   A0 // instead of A3    // Analog PIN 3
-
-  //#define OVERRIDE_PSENSORPIN                 A1 // instead of A2    // Analog PIN 2
-
-  //#define OVERRIDE_LEDPIN_PINMODE             pinMode (A1, OUTPUT); // use A1 instead of d13
-  //#define OVERRIDE_LEDPIN_TOGGLE              PINC |= 1<<1; // PINB |= 1<<5;     //switch LEDPIN state (digital PIN 13)
-  //#define OVERRIDE_LEDPIN_OFF                 PORTC &= ~(1<<1); // PORTB &= ~(1<<5);
-  //#define OVERRIDE_LEDPIN_ON                  PORTC |= 1<<1;    // was PORTB |= (1<<5);
-
-  //#define OVERRIDE_BUZZERPIN_PINMODE          pinMode (A2, OUTPUT); // use A2 instead of d8
-  //#define OVERRIDE_BUZZERPIN_ON               PORTC |= 1<<2 //PORTB |= 1;
-  //#define OVERRIDE_BUZZERPIN_OFF              PORTC &= ~(1<<2); //PORTB &= ~1;
-
 /*************************************************************************************************/
 /*****************                                                                 ***************/
 /****************  SECTION  5 - ALTERNATE SETUP                                            *******/
@@ -526,12 +432,6 @@ At this moment you can use this function only with WinGUI 2.3 release. MultiWiiC
       //#define GYRO_LPF_20HZ
       //#define GYRO_LPF_10HZ
       //#define GYRO_LPF_5HZ       // Use this only in extreme cases, rather change motors and/or props -- setting not available on ITG3200
-
-    /******                Gyro smoothing    **********************************/
-      /* GYRO_SMOOTHING. In case you cannot reduce vibrations _and_ _after_ you have tried the low pass filter options, you
-         may try this gyro smoothing via averaging. Not suitable for multicopters!
-         Good results for helicopter, airplanes and flying wings (foamies) with lots of vibrations.*/
-      //#define GYRO_SMOOTHING {20, 20, 3}    // (*) separate averaging ranges for roll, pitch, yaw
 
     /************************    Moving Average Gyros    **********************************/
       //#define MMGYRO 10                      // (*) Active Moving Average Function for Gyros
