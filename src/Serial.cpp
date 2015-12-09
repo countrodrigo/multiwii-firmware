@@ -11,18 +11,6 @@ static uint8_t serialBufferTX[TX_BUFFER_SIZE][UART_NUMBER];
 
 
 // *******************************************************
-// For Teensy 2.0, these function emulate the API used for ProMicro
-// it cant have the same name as in the arduino API because it wont compile for the promini (eaven if it will be not compiled)
-// *******************************************************
-#if defined(TEENSY20)
-  unsigned char T_USB_Available(){
-    int n = Serial.available();
-    if (n > 255) n = 255;
-    return n;
-  }
-#endif
-
-// *******************************************************
 // Interrupt driven UART transmitter - using a ring buffer
 // *******************************************************
 
@@ -84,11 +72,7 @@ void UartSendData(uint8_t port) {
       case 0:
         while(serialHeadTX[0] != serialTailTX[0]) {
            if (++serialTailTX[0] >= TX_BUFFER_SIZE) serialTailTX[0] = 0;
-           #if !defined(TEENSY20)
-             USB_Send(USB_CDC_TX,serialBufferTX[serialTailTX[0]],1);
-           #else
-             Serial.write(serialBufferTX[serialTailTX[0]],1);
-           #endif
+           USB_Send(USB_CDC_TX,serialBufferTX[serialTailTX[0]],1);
          }
         break;
       case 1: UCSR1B |= (1<<UDRIE1); break;
@@ -118,7 +102,7 @@ void SerialOpen(uint8_t port, uint32_t baud) {
       case 0: UCSR0A  = (1<<U2X0); UBRR0H = h; UBRR0L = l; UCSR0B |= (1<<RXEN0)|(1<<TXEN0)|(1<<RXCIE0); break;
     #endif
     #if defined(PROMICRO)
-      #if (ARDUINO >= 100) && !defined(TEENSY20)
+      #if (ARDUINO >= 100)
         case 0: UDIEN &= ~(1<<SOFE); break;// disable the USB frame interrupt of arduino (it causes strong jitter and we dont need it)
       #endif
       case 1: UCSR1A  = (1<<U2X1); UBRR1H = h; UBRR1L = l; UCSR1B |= (1<<RXEN1)|(1<<TXEN1)|(1<<RXCIE1); break;
@@ -189,14 +173,10 @@ void store_uart_in_buf(uint8_t data, uint8_t portnum) {
 
 uint8_t SerialRead(uint8_t port) {
   #if defined(PROMICRO)
-    #if defined(TEENSY20)
-      if(port == 0) return Serial.read();
-    #else
       #if (ARDUINO >= 100)
         if(port == 0) USB_Flush(USB_CDC_TX);
       #endif
       if(port == 0) return USB_Recv(USB_CDC_RX);      
-    #endif
   #endif
   uint8_t t = serialTailRX[port];
   uint8_t c = serialBufferRX[t][port];
@@ -216,11 +196,7 @@ uint8_t SerialRead(uint8_t port) {
 
 uint8_t SerialAvailable(uint8_t port) {
   #if defined(PROMICRO)
-    #if !defined(TEENSY20)
       if(port == 0) return USB_Available(USB_CDC_RX);
-    #else
-      if(port == 0) return T_USB_Available();
-    #endif
   #endif
   return ((uint8_t)(serialHeadRX[port] - serialTailRX[port]))%RX_BUFFER_SIZE;
 }

@@ -41,7 +41,7 @@
     //#define MINTHROTTLE 1120 // for Super Simple ESCs 10A
     //#define MINTHROTTLE 1064 // special ESC (simonk)
     //#define MINTHROTTLE 1050 // for brushed ESCs like ladybird
-    #define MINTHROTTLE 1150 // (*) (**)
+    #define MINTHROTTLE 1064 // (*) (**)
 
   /****************************    Motor maxthrottle    *******************************/
     /* this is the maximum value for the ESCs at full power, this value can be increased up to 2000 */
@@ -50,7 +50,8 @@
   /****************************    Mincommand          *******************************/
     /* this is the value for the ESCs when they are not armed
        in some cases, this value must be lowered down to 900 for some specific ESCs, otherwise they failed to initiate */
-    #define MINCOMMAND  1000
+//    #define MINCOMMAND  1000
+	#define MINCOMMAND  900
 
   /**********************************  I2C speed for old WMP config (useless config for other sensors)  *************/
 //    #define I2C_SPEED 100000L     //100kHz normal mode, this value must be used for a genuine WMP
@@ -68,79 +69,8 @@
   /**************************************************************************************/
 
     /***************************    Combined IMU Boards    ********************************/
-      /* if you use a specific sensor board:
-         please submit any correction to this list.
-           Note from Alex: I only own some boards, for other boards, I'm not sure, the info was gathered via rc forums, be cautious */
-      //#define FFIMUv1         // first 9DOF+baro board from Jussi, with HMC5843                   <- confirmed by Alex
-      //#define FFIMUv2         // second version of 9DOF+baro board from Jussi, with HMC5883       <- confirmed by Alex
-      //#define FREEIMUv1       // v0.1 & v0.2 & v0.3 version of 9DOF board from Fabio
-      //#define FREEIMUv03      // FreeIMU v0.3 and v0.3.1
-      //#define FREEIMUv035     // FreeIMU v0.3.5 no baro
-      //#define FREEIMUv035_MS  // FreeIMU v0.3.5_MS                                                <- confirmed by Alex
-      //#define FREEIMUv035_BMP // FreeIMU v0.3.5_BMP
-      //#define FREEIMUv04      // FreeIMU v0.4 with MPU6050, HMC5883L, MS561101BA                  <- confirmed by Alex
-      //#define FREEIMUv043     // same as FREEIMUv04 with final MPU6050 (with the right ACC scale)
-      //#define NANOWII         // the smallest multiwii FC based on MPU6050 + pro micro based proc <- confirmed by Alex
-      //#define PIPO            // 9DOF board from erazz
-      //#define QUADRINO        // full FC board 9DOF+baro board from witespy  with BMP085 baro     <- confirmed by Alex
-      //#define QUADRINO_ZOOM   // full FC board 9DOF+baro board from witespy  second edition
-      //#define QUADRINO_ZOOM_MS// full FC board 9DOF+baro board from witespy  second edition       <- confirmed by Alex
-      //#define QUADRINO_NANO   // full FC board 9DOF+baro board+GPS from Lynxmotion / RobotShop    <- confirmed by Alex
-      //#define ALLINONE        // full FC board or standalone 9DOF+baro board from CSG_EU
-      //#define AEROQUADSHIELDv2
-      //#define ATAVRSBIN1      // Atmel 9DOF (Contribution by EOSBandi). requires 3.3V power.
-      //#define SIRIUS          // Sirius Navigator IMU                                             <- confirmed by Alex
-      //#define SIRIUSGPS       // Sirius Navigator IMU  using external MAG on GPS board            <- confirmed by Alex
-      //#define SIRIUS600       // Sirius Navigator IMU  using the WMP for the gyro
-      //#define SIRIUS_AIR      // Sirius Navigator IMU 6050 32U4 from MultiWiiCopter.com           <- confirmed by Alex
-      //#define SIRIUS_AIR_GPS  // Sirius Navigator IMU 6050 32U4 from MultiWiiCopter.com with GPS/MAG remote located
-      //#define SIRIUS_MEGAv5_OSD //  Paris_Sirius™ ITG3050,BMA280,MS5611,HMC5883,uBlox  http://www.Multiwiicopter.com <- confirmed by Alex
-      //#define MINIWII         // Jussi's MiniWii Flight Controller                                <- confirmed by Alex
-      //#define MICROWII        // MicroWii 10DOF with ATmega32u4, MPU6050, HMC5883L, MS561101BA from http://flyduino.net/
-      //#define CITRUSv2_1      // CITRUS from qcrc.ca
-      //#define CHERRY6DOFv1_0
-      //#define DROTEK_10DOF    // Drotek 10DOF with ITG3200, BMA180, HMC5883, BMP085, w or w/o LLC
-      //#define DROTEK_10DOF_MS // Drotek 10DOF with ITG3200, BMA180, HMC5883, MS5611, LLC
-      //#define DROTEK_6DOFv2   // Drotek 6DOF v2
-      //#define DROTEK_6DOF_MPU // Drotek 6DOF with MPU6050
-      //#define DROTEK_10DOF_MPU//
-      //#define MONGOOSE1_0     // mongoose 1.0    http://store.ckdevices.com/
-      //#define CRIUS_LITE      // Crius MultiWii Lite
-      //#define CRIUS_SE        // Crius MultiWii SE
-      //#define CRIUS_SE_v2_0   // Crius MultiWii SE 2.0 with MPU6050, HMC5883 and BMP085
-      //#define OPENLRSv2MULTI  // OpenLRS v2 Multi Rc Receiver board including ITG3205 and ADXL345
-      //#define BOARD_PROTO_1   // with MPU6050 + HMC5883L + MS baro
-      //#define BOARD_PROTO_2   // with MPU6050 + slave  MAG3110 + MS baro
-      //#define GY_80           // Chinese 10 DOF with  L3G4200D ADXL345 HMC5883L BMP085, LLC
-      //#define GY_85           // Chinese 9 DOF with  ITG3205 ADXL345 HMC5883L LLC
-      //#define GY_86           // Chinese 10 DOF with  MPU6050 HMC5883L MS5611, LLC
-      //#define GY_88 // Chinese 10 DOF with MPU6050 HMC5883L BMP085, LLC
-      //#define GY_521          // Chinese 6  DOF with  MPU6050, LLC
-      //#define INNOVWORKS_10DOF // with ITG3200, BMA180, HMC5883, BMP085 available here http://www.diymulticopter.com
-      //#define INNOVWORKS_6DOF // with ITG3200, BMA180 available here http://www.diymulticopter.com
-      //#define MultiWiiMega    // MEGA + MPU6050+HMC5883L+MS5611 available here http://www.diymulticopter.com
-      //#define PROTO_DIY       // 10DOF mega board
-      //#define IOI_MINI_MULTIWII// www.bambucopter.com
-      //#define Bobs_6DOF_V1     // BobsQuads 6DOF V1 with ITG3200 & BMA180
-      //#define Bobs_9DOF_V1     // BobsQuads 9DOF V1 with ITG3200, BMA180 & HMC5883L
-      //#define Bobs_10DOF_BMP_V1 // BobsQuads 10DOF V1 with ITG3200, BMA180, HMC5883L & BMP180 - BMP180 is software compatible with BMP085
-      //#define FLYDUINO_MPU       // MPU6050 Break Out onboard 3.3V reg
+      //if you use a specific sensor board:
       #define CRIUS_AIO_PRO
-      //#define DESQUARED6DOFV2GO  // DEsquared V2 with ITG3200 only
-      //#define DESQUARED6DOFV4    // DEsquared V4 with MPU6050
-      //#define LADYBIRD
-      //#define MEGAWAP_V2_STD     // available here: http://www.multircshop.com                    <- confirmed by Alex
-      //#define MEGAWAP_V2_ADV
-      //#define HK_MultiWii_SE_V2  // Hobbyking board with MPU6050 + HMC5883L + BMP085
-      //#define HK_MultiWii_328P   // Also labeled "Hobbybro" on the back.  ITG3205 + BMA180 + BMP085 + NMC5583L + DSM2 Connector (Spektrum Satellite)  
-      //#define RCNet_FC           // RCNet FC with MPU6050 and MS561101BA  http://www.rcnet.com
-      //#define RCNet_FC_GPS       // RCNet FC with MPU6050 + MS561101BA + HMC5883L + UBLOX GPS http://www.rcnet.com
-      //#define FLYDU_ULTRA        // MEGA+10DOF+MT3339 FC
-      //#define DIYFLYING_MAGE_V1  // diyflying 10DOF mega board with MPU6050 + HMC5883L + BMP085 http://www.indoor-flying.hk
-      //#define MultiWii_32U4_SE         // Hextronik MultiWii_32U4_SE
-      //#define MultiWii_32U4_SE_no_baro // Hextronik MultiWii_32U4_SE without the MS561101BA to free flash-memory for other functions
-      //#define Flyduino9DOF       // Flyduino 9DOF IMU MPU6050+HMC5883l
-      //#define Nano_Plane         // Multiwii Plane version with tail-front LSM330 sensor http://www.radiosait.ru/en/page_5324.html
       
     /***************************    independent sensors    ********************************/
       /* leave it commented if you already checked a specific board above */
@@ -351,15 +281,6 @@ At this moment you can use this function only with WinGUI 2.3 release. MultiWiiC
          it deactivates in this case the POWER PIN (pin 12) or the BUZZER PIN (pin 8) */
       //#define RCAUXPIN8
       //#define RCAUXPIN12
-
-
-  /**************************************************************************************/
-  /*****************             Teensy 2.0 Support                    ******************/
-  /**************************************************************************************/
-    /* uncomment this if you use a teensy 2.0 with teensyduino
-       it needs to run at 16MHz */
-    //#define TEENSY20
-
 
   /**************************************************************************************/
   /********   Settings for ProMicro, Leonardo and other Atmega32u4 Boards     ***********/
@@ -928,25 +849,11 @@ Also note, that maqgnetic declination changes with time, so recheck your value e
     //#define EXT_MOTOR_RANGE // using this with wii-esc requires to change MINCOMMAND to 1008 for promini and mega
 
   /**************************************************************************************/
-  /********  brushed ESC ****************************************************************/
-  /**************************************************************************************/
-    // for 328p proc
-    //#define EXT_MOTOR_32KHZ
-    //#define EXT_MOTOR_4KHZ
-    //#define EXT_MOTOR_1KHZ
-  
-    // for 32u4 proc
-    //#define EXT_MOTOR_64KHZ
-    //#define EXT_MOTOR_32KHZ
-    //#define EXT_MOTOR_16KHZ
-    //#define EXT_MOTOR_8KHZ
-
-  /**************************************************************************************/
   /***********************     motor, servo and other presets     ***********************/
   /**************************************************************************************/
     /* motors will not spin when the throttle command is in low position
        this is an alternative method to stop immediately the motors */
-    //#define MOTOR_STOP
+//    #define MOTOR_STOP
 
     /* some radios have not a neutral point centered on 1500. can be changed here */
     #define MIDRC 1500

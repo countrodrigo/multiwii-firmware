@@ -21,17 +21,13 @@ void initializeServo();
 #endif
 #if defined(PROMICRO)
   #if !defined(HWPWM6)
-    #if defined(TEENSY20)
-      uint8_t PWM_PIN[8] = {14,15,9,12,22,18,16,17};   //for a quad+: rear,right,left,front
-    #elif defined(A32U4_4_HW_PWM_SERVOS)
+    #if defined(A32U4_4_HW_PWM_SERVOS)
       uint8_t PWM_PIN[8] = {6,9,10,11,5,13,SW_PWM_P3,SW_PWM_P4};   //
     #else
     uint8_t PWM_PIN[8] = {9,10,5,6,4,A2,SW_PWM_P3,SW_PWM_P4};   //for a quad+: rear,right,left,front
     #endif
   #else
-    #if defined(TEENSY20)
-      uint8_t PWM_PIN[8] = {14,15,9,12,4,10,16,17};   //for a quad+: rear,right,left,front
-    #elif defined(A32U4_4_HW_PWM_SERVOS)
+    #if defined(A32U4_4_HW_PWM_SERVOS)
       uint8_t PWM_PIN[8] = {6,9,10,11,5,13,SW_PWM_P3,SW_PWM_P4};   //
     #else
       uint8_t PWM_PIN[8] = {9,10,5,6,11,13,SW_PWM_P3,SW_PWM_P4};   //for a quad+: rear,right,left,front
@@ -1121,109 +1117,11 @@ void mixTable() {
   /****************                   main Mix Table                ******************/
   #if defined( MY_PRIVATE_MIXING )
     #include MY_PRIVATE_MIXING
-  #elif defined( BI )
-    motor[0] = PIDMIX(+1, 0, 0); //LEFT
-    motor[1] = PIDMIX(-1, 0, 0); //RIGHT
-    servo[4] = (SERVODIR(4,2) * axisPID[YAW]) + (SERVODIR(4,1) * axisPID[PITCH]) + get_middle(4); //LEFT
-    servo[5] = (SERVODIR(5,2) * axisPID[YAW]) + (SERVODIR(5,1) * axisPID[PITCH]) + get_middle(5); //RIGHT
-  #elif defined( TRI )
-    motor[0] = PIDMIX( 0,+4/3, 0); //REAR
-    motor[1] = PIDMIX(-1,-2/3, 0); //RIGHT
-    motor[2] = PIDMIX(+1,-2/3, 0); //LEFT
-    servo[5] = (SERVODIR(5, 1) * axisPID[YAW]) + get_middle(5); //REAR
-  #elif defined( QUADP )
-    motor[0] = PIDMIX( 0,+1,-1); //REAR
-    motor[1] = PIDMIX(-1, 0,+1); //RIGHT
-    motor[2] = PIDMIX(+1, 0,+1); //LEFT
-    motor[3] = PIDMIX( 0,-1,-1); //FRONT
   #elif defined( QUADX )
     motor[0] = PIDMIX(-1,+1,-1); //REAR_R
     motor[1] = PIDMIX(-1,-1,+1); //FRONT_R
     motor[2] = PIDMIX(+1,+1,+1); //REAR_L
     motor[3] = PIDMIX(+1,-1,-1); //FRONT_L
-  #elif defined( Y4 )
-    motor[0] = PIDMIX(+0,+1,-1);   //REAR_1 CW
-    motor[1] = PIDMIX(-1,-1, 0); //FRONT_R CCW
-    motor[2] = PIDMIX(+0,+1,+1);   //REAR_2 CCW
-    motor[3] = PIDMIX(+1,-1, 0); //FRONT_L CW
-  #elif defined( Y6 )
-    motor[0] = PIDMIX(+0,+4/3,+1); //REAR
-    motor[1] = PIDMIX(-1,-2/3,-1); //RIGHT
-    motor[2] = PIDMIX(+1,-2/3,-1); //LEFT
-    motor[3] = PIDMIX(+0,+4/3,-1); //UNDER_REAR
-    motor[4] = PIDMIX(-1,-2/3,+1); //UNDER_RIGHT
-    motor[5] = PIDMIX(+1,-2/3,+1); //UNDER_LEFT
-  #elif defined( HEX6 )
-    motor[0] = PIDMIX(-7/8,+1/2,+1); //REAR_R
-    motor[1] = PIDMIX(-7/8,-1/2,-1); //FRONT_R
-    motor[2] = PIDMIX(+7/8,+1/2,+1); //REAR_L
-    motor[3] = PIDMIX(+7/8,-1/2,-1); //FRONT_L
-    motor[4] = PIDMIX(+0  ,-1  ,+1); //FRONT
-    motor[5] = PIDMIX(+0  ,+1  ,-1); //REAR
-  #elif defined( HEX6X )
-    motor[0] = PIDMIX(-1/2,+7/8,+1); //REAR_R
-    motor[1] = PIDMIX(-1/2,-7/8,+1); //FRONT_R
-    motor[2] = PIDMIX(+1/2,+7/8,-1); //REAR_L
-    motor[3] = PIDMIX(+1/2,-7/8,-1); //FRONT_L
-    motor[4] = PIDMIX(-1  ,+0  ,-1); //RIGHT
-    motor[5] = PIDMIX(+1  ,+0  ,+1); //LEFT
-  #elif defined( HEX6H )
-    motor[0] = PIDMIX(-1,+1,-1); //REAR_R
-    motor[1] = PIDMIX(-1,-1,+1); //FRONT_R
-    motor[2] = PIDMIX(+ 1,+1,+1); //REAR_L
-    motor[3] = PIDMIX(+ 1,-1,-1); //FRONT_L
-    motor[4] = PIDMIX(0 ,0 ,0); //RIGHT
-    motor[5] = PIDMIX(0 ,0 ,0); //LEFT
-  #elif defined( OCTOX8 )
-    motor[0] = PIDMIX(-1,+1,-1); //REAR_R
-    motor[1] = PIDMIX(-1,-1,+1); //FRONT_R
-    motor[2] = PIDMIX(+1,+1,+1); //REAR_L
-    motor[3] = PIDMIX(+1,-1,-1); //FRONT_L
-    motor[4] = PIDMIX(-1,+1,+1); //UNDER_REAR_R
-    motor[5] = PIDMIX(-1,-1,-1); //UNDER_FRONT_R
-    motor[6] = PIDMIX(+1,+1,-1); //UNDER_REAR_L
-    motor[7] = PIDMIX(+1,-1,+1); //UNDER_FRONT_L
-  #elif defined( OCTOFLATP )
-    motor[0] = PIDMIX(+7/10,-7/10,+1); //FRONT_L
-    motor[1] = PIDMIX(-7/10,-7/10,+1); //FRONT_R
-    motor[2] = PIDMIX(-7/10,+7/10,+1); //REAR_R
-    motor[3] = PIDMIX(+7/10,+7/10,+1); //REAR_L
-    motor[4] = PIDMIX(+0   ,-1   ,-1); //FRONT
-    motor[5] = PIDMIX(-1   ,+0   ,-1); //RIGHT
-    motor[6] = PIDMIX(+0   ,+1   ,-1); //REAR
-    motor[7] = PIDMIX(+1   ,+0   ,-1); //LEFT
-  #elif defined( OCTOFLATX )
-    motor[0] = PIDMIX(+1  ,-1/2,+1); //MIDFRONT_L
-    motor[1] = PIDMIX(-1/2,-1  ,+1); //FRONT_R
-    motor[2] = PIDMIX(-1  ,+1/2,+1); //MIDREAR_R
-    motor[3] = PIDMIX(+1/2,+1  ,+1); //REAR_L
-    motor[4] = PIDMIX(+1/2,-1  ,-1); //FRONT_L
-    motor[5] = PIDMIX(-1  ,-1/2,-1); //MIDFRONT_R
-    motor[6] = PIDMIX(-1/2,+1  ,-1); //REAR_R
-    motor[7] = PIDMIX(+1  ,+1/2,-1); //MIDREAR_L
-  #elif defined( VTAIL4 )
-    motor[0] = PIDMIX(+0,+1, +1); //REAR_R
-    motor[1] = PIDMIX(-1, -1, +0); //FRONT_R
-    motor[2] = PIDMIX(+0,+1, -1); //REAR_L
-    motor[3] = PIDMIX(+1, -1, -0); //FRONT_L
-  #elif defined( FLYING_WING )
-    /*****************************             FLYING WING                **************************************/
-    if (!f.ARMED) {
-      servo[7] = MINCOMMAND;  // Kill throttle when disarmed
-    } else {
-      servo[7] = constrain(rcCommand[THROTTLE], conf.minthrottle, MAXTHROTTLE);
-    }
-    motor[0] = servo[7];
-    if (f.PASSTHRU_MODE) {    // do not use sensors for correction, simple 2 channel mixing
-      servo[3] = (SERVODIR(3,1) * rcCommand[PITCH]) + (SERVODIR(3,2) * rcCommand[ROLL]);
-      servo[4] = (SERVODIR(4,1) * rcCommand[PITCH]) + (SERVODIR(4,2) * rcCommand[ROLL]);
-    } else {                  // use sensors to correct (gyro only or gyro+acc according to aux1/aux2 configuration
-      servo[3] = (SERVODIR(3,1) * axisPID[PITCH])   + (SERVODIR(3,2) * axisPID[ROLL]);
-      servo[4] = (SERVODIR(4,1) * axisPID[PITCH])   + (SERVODIR(4,2) * axisPID[ROLL]);
-    }
-    servo[3] += get_middle(3);
-    servo[4] += get_middle(4);
-
   #elif defined( GIMBAL )
     for(i=0;i<2;i++) {
       servo[i]  = ((int32_t)conf.servoConf[i].rate * att.angle[1-i]) /50L;
