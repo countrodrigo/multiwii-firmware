@@ -90,8 +90,10 @@
     #define PL_PIN_ON                  PORTC |= 1<<5;
     #define PL_PIN_OFF                 PORTC &= ~(1<<5);
   #else
-    #define BUZZERPIN_ON               PORTC |= 1<<5;
-    #define BUZZERPIN_OFF              PORTC &= ~(1<<5);
+//    #define BUZZERPIN_ON               PORTC |= 1<<5;
+//    #define BUZZERPIN_OFF              PORTC &= ~(1<<5);
+	#define BUZZERPIN_ON               PORTF |= 1<<7;
+    #define BUZZERPIN_OFF              PORTF &= ~(1<<7);
   #endif 
     
   #if !defined(DISABLE_POWER_PIN)

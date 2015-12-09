@@ -607,7 +607,7 @@ Also note, that maqgnetic declination changes with time, so recheck your value e
       //#define LCD_SERIAL3W    // Alex' initial variant with 3 wires, using rx-pin for transmission @9600 baud fixed
       //#define LCD_TEXTSTAR    // SERIAL LCD: Cat's Whisker LCD_TEXTSTAR Module CW-LCD-02 (Which has 4 input keys for selecting menus)
       //#define LCD_VT100       // SERIAL LCD: vt100 compatible terminal emulation (blueterm, putty, etc.)
-      //#define LCD_TTY         // SERIAL LCD: useful to tweak parameters over cable with arduino IDE 'serial monitor'
+      #define LCD_TTY         // SERIAL LCD: useful to tweak parameters over cable with arduino IDE 'serial monitor'
       //#define LCD_ETPP        // I2C LCD: Eagle Tree Power Panel LCD, which is i2c (not serial)
       //#define LCD_LCD03       // I2C LCD: LCD03, which is i2c
       //#define LCD_LCD03S      // SERIAL LCD: LCD03 whit serial 9600 baud comunication enabled.
@@ -648,7 +648,7 @@ Also note, that maqgnetic declination changes with time, so recheck your value e
 
     /* uncomment this line if you plan to use a LCD or OLED for tweaking parameters
      * http://www.multiwii.com/wiki/index.php?title=Extra_features#Configuration_Menu */
-      //#define LCD_CONF
+//      #define LCD_CONF
 
     /* to include setting the aux switches for AUX1 -> AUX4 via LCD */
       //#define LCD_CONF_AUX
@@ -665,10 +665,10 @@ Also note, that maqgnetic declination changes with time, so recheck your value e
      * http://www.multiwii.com/wiki/index.php?title=LCD_Telemetry */
 
     /********************************    Activation     ***********************************/
-    //#define LCD_TELEMETRY
+    #define LCD_TELEMETRY
 
     /* to enable automatic hopping between a choice of telemetry pages uncomment this. */
-    //#define LCD_TELEMETRY_AUTO "123452679" // pages 1 to 9 in ascending order
+    #define LCD_TELEMETRY_AUTO "123452679" // pages 1 to 9 in ascending order
     //#define LCD_TELEMETRY_AUTO  "212232425262729" // strong emphasis on page 2
 
     /* manual stepping sequence; first page of the sequence gets loaded at startup to allow non-interactive display */
@@ -728,8 +728,8 @@ Also note, that maqgnetic declination changes with time, so recheck your value e
   /********************************************************************/
   /****                             Buzzer                         ****/
   /********************************************************************/
-    //#define BUZZER
-    //#define RCOPTIONSBEEP         // uncomment this if you want the buzzer to beep at any rcOptions change on channel Aux1 to Aux4
+    #define BUZZER
+    #define RCOPTIONSBEEP         // uncomment this if you want the buzzer to beep at any rcOptions change on channel Aux1 to Aux4
     //#define ARMEDTIMEWARNING 330  // (*) Trigger an alarm after a certain time of being armed [s] to save you lipo (if your TX does not have a countdown)
     //#define PILOTLAMP             //Uncomment if you are using a X-Arcraft Pilot Lamp
 
